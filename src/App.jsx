@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import RecentlyViewed from './components/PersonalizedContent';
+import ThemeSwitcher from './components/Remember User Preferences';
+import Login from './components/Store Authentication Token';
+import Cart from './components/Cart Management';
+import LanguageSelector from './components/Language Selection';
+import PageTracker from './components/Tracking User Activity';
+import Dashboard from './components/Cookie-Based Access Control and Authorization';
+import NewFeature from './components/Feature Flag for New Feature Rollout';
+import CookieExample from './components/CookieExample';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [itemId, setItemId] = useState(1); // Set an initial item ID to pass to RecentlyViewed
+
+  // Optionally update itemId dynamically
+  const handleChangeItem = () => {
+    const newItemId = itemId + 1; // Example: Increment item ID
+    setItemId(newItemId);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <CookieExample />
+      <Login />
+      <ThemeSwitcher />
+      <RecentlyViewed itemId={itemId} />{' '}
+      {/* Pass the itemId to RecentlyViewed */}
+      {/* Button to change the item ID (simulating viewing a new item) */}
+      <button onClick={handleChangeItem}>View Next Item</button>
+      <Cart />
+      <LanguageSelector />
+      <PageTracker />
+      <Dashboard />
+      <NewFeature />
+    </div>
+  );
 }
 
-export default App
+export default App;
